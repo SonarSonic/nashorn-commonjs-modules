@@ -1,11 +1,13 @@
 package com.coveo.nashorn_modules;
 
 public interface Folder {
-  public Folder getParent();
 
-  public String getPath();
+    Folder getParent();
 
-  public String getFile(String name);
+    String getPath();
 
-  public Folder getFolder(String name);
+    String getFile(String name);
+
+    Folder getFolder(String name);
+
 }
