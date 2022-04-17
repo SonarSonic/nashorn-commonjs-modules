@@ -22,8 +22,7 @@ public class Module extends SimpleBindings implements RequireFunction {
     private Object exports;
     private static final ThreadLocal<Map<String, Bindings>> refCache = new ThreadLocal<>();
 
-    public Module(
-            NashornScriptEngine engine,
+    public Module(NashornScriptEngine engine,
             Folder folder,
             ModuleCache cache,
             String filename,
