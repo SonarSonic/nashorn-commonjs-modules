@@ -7,8 +7,9 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.commons:commons-io:1.3.2'
-    implementation 'org.openjdk.nashorn:nashorn-core:15.3'
-    testImplementation "junit:junit:4.13"
+    implementation(libs.bundles.apache)
+    implementation(libs.nashorn)
     testImplementation 'org.mockito:mockito-core:1.10.19'
+
+    testImplementation(libs.junit)
 }
