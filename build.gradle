@@ -1,5 +1,6 @@
 plugins {
     id 'application'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 repositories {
@@ -7,9 +8,15 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.kotlin)
+    implementation(libs.jetbrains)
+
     implementation(libs.bundles.apache)
     implementation(libs.nashorn)
     testImplementation 'org.mockito:mockito-core:1.10.19'
 
     testImplementation(libs.junit4)
+}
+kotlin {
+    jvmToolchain(21)
 }
