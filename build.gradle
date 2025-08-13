@@ -18,5 +18,5 @@ dependencies {
     testImplementation(libs.junit4)
 }
 kotlin {
-    jvmToolchain(21)
+    jvmToolchain(Integer.valueOf(kotlin_jvm_version))
 }
