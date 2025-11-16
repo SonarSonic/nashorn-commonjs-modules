@@ -1,10 +1,10 @@
 package com.coveo.nashorn_modules;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.openjdk.nashorn.api.scripting.NashornException;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
 import org.openjdk.nashorn.api.scripting.ScriptObjectMirror;
@@ -13,12 +13,12 @@ import javax.script.*;
 import java.io.File;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 //requires java --add-opens java.base/java.lang=ALL-UNNAMED
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ModuleTest {
     @Mock
     Folder root;
@@ -36,7 +36,7 @@ public class ModuleTest {
     NashornScriptEngine engine;
     Module require;
 
-    @Before
+    @BeforeEach
     public void before() throws Throwable {
         when(root.getPath()).thenReturn("/");
         when(root.getFolder("node_modules")).thenReturn(rootnm);
@@ -218,9 +218,9 @@ public class ModuleTest {
         assertEquals("nmfile1", ((Bindings) require.require("./nmfile1")).get("nmfile1"));
     }
 
-    @Test(expected = NashornException.class)
+    @Test
     public void itDoesNotUseModulesOutsideOfNodeModulesForNonPrefixedNames() throws Throwable {
-        require.require("file1.js");
+        assertThrows(NashornException.class, () -> require.require("file1.js"));
     }
 
     @Test
@@ -260,31 +260,31 @@ public class ModuleTest {
         assertEquals("file1", ((Bindings) require.require("./file1")).get("file1"));
     }
 
-    @Test(expected = NashornException.class)
+    @Test
     public void itThrowsAnExceptionIfFileDoesNotExists() throws Throwable {
-        require.require("./invalid");
+        assertThrows(NashornException.class, () -> require.require("./invalid"));
     }
 
-    @Test(expected = NashornException.class)
+    @Test
     public void itThrowsAnExceptionIfSubFileDoesNotExists() throws Throwable {
-        require.require("./sub1/invalid");
+        assertThrows(NashornException.class, () -> require.require("./sub1/invalid"));
     }
 
-    @Test(expected = NashornException.class)
+    @Test
     public void itThrowsEnExceptionIfFolderDoesNotExists() throws Throwable {
-        require.require("./invalid/file1.js");
+        assertThrows(NashornException.class, () -> require.require("./invalid/file1.js"));
     }
 
-    @Test(expected = NashornException.class)
+    @Test
     public void itThrowsEnExceptionIfSubFolderDoesNotExists() throws Throwable {
-        require.require("./sub1/invalid/file1.js");
+        assertThrows(NashornException.class, () -> require.require("./sub1/invalid/file1.js"));
     }
 
-    @Test(expected = NashornException.class)
+    @Test
     public void itThrowsAnExceptionIfTryingToGoAboveTheTopLevelFolder() throws Throwable {
         // We need two ".." because otherwise the resolving attempts to load from "node_modules" and
         // ".." validly points to the root folder there.
-        require.require("../../file1.js");
+        assertThrows(NashornException.class, () -> require.require("../../file1.js"));
     }
 
     @Test

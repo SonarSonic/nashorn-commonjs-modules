@@ -1,12 +1,12 @@
 package com.coveo.nashorn_modules;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
 
 import javax.script.ScriptEngineManager;
 import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FilesystemFolderTest {
     private final File file = new File("src/test/resources/com/coveo/nashorn_modules/test1");

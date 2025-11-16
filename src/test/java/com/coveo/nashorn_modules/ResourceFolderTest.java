@@ -1,11 +1,11 @@
 package com.coveo.nashorn_modules;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openjdk.nashorn.api.scripting.NashornScriptEngine;
 
 import javax.script.ScriptEngineManager;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ResourceFolderTest {
     private final ResourceFolder root = ResourceFolder.create(getClass().getClassLoader(), "com/coveo/nashorn_modules/test1", "UTF-8");
